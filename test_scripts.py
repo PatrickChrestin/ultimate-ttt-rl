@@ -50,7 +50,7 @@ def playUltimateForTraining():
         games.playGamesAndGetWinPercent()
         learningPlayer.saveLearning(tempFileName)
         results.append(os.path.getsize(tempFileName))
-    print '\n'.join(map(str, results))
+    print ('\n'.join(map(str, results)))
     os.remove(tempFileName)
 
 def writeResultsToFile(results):
