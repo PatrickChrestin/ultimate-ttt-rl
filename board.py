@@ -22,32 +22,37 @@ class TTTBoard():
                 [GridStates.EMPTY, GridStates.EMPTY, GridStates.EMPTY]]
 
     def determineBoardState(self):
+        if (self.decision != TTTBoardDecision.ACTIVE):
+            return
+
         def winCheck(listOfThree):
             return len(set(listOfThree)) == 1 and GridStates.EMPTY not in listOfThree
 
         def getWinState(listOfThree):
             return TTTBoardDecision.WON_O if GridStates.PLAYER_O in listOfThree else TTTBoardDecision.WON_X
 
+        # check rows
         for row in self.board:  # Check rows first
             if winCheck(row):  # The row was won
                 self.decision = getWinState(row)
                 return
+        # check columns
         for j in range(3):  # Check columns next
             column = [self.board[0][j], self.board[1][j], self.board[2][j]]
             if winCheck(column):
                 self.decision = getWinState(column)
                 return
+        # check diagonals
         diagonal1 = [self.board[i][j] for (i,j) in zip(range(3), range(3))]
-        diagonal2 = [self.board[i][j] for (i, j) in zip(range(3), range(2,-1,-1))]
         if winCheck(diagonal1):
             self.decision = getWinState(diagonal1)
             return
+        diagonal2 = [self.board[i][j] for (i, j) in zip(range(3), range(2,-1,-1))]
         if winCheck(diagonal2):
             self.decision = getWinState(diagonal2)
             return
-        if filter(lambda x: GridStates.EMPTY in x, self.board):  # Board is full
-            self.decision = TTTBoardDecision.ACTIVE
-        else:
+        # check for draw
+        if not self.getDoesBoardHaveEmptyCell():
             self.decision = TTTBoardDecision.DRAW
 
     def makeMove(self, who, i, j, verbose=True):   # who is PLAYER_X or PLAYER_O
