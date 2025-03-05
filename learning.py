@@ -1,8 +1,8 @@
 from board import GridStates, TTTBoardDecision
 import json
-from keras.models import Sequential, load_model
-from keras.layers import Dense
-from keras.utils import plot_model
+from tensorflow.keras.models import Sequential, load_model
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.utils import plot_model
 import numpy as np
 
 class GenericLearning(object):
