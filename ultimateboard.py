@@ -20,11 +20,11 @@ class UTTTBoard(object):
 
     def determineBoardState(self):
         def winCheck(listOfThree):
-            threeResults = map(lambda x: x.getBoardDecision(), listOfThree)
+            threeResults = list(map(lambda x: x.getBoardDecision(), listOfThree))
             return len(set(threeResults)) == 1 and threeResults[0] in [TTTBoardDecision.WON_O, TTTBoardDecision.WON_X]
 
         def getWinState(listOfThree):
-            threeResults = map(lambda x: x.getBoardDecision(), listOfThree)
+            threeResults = list(map(lambda x: x.getBoardDecision(), listOfThree))
             return UTTTBoardDecision.WON_O if TTTBoardDecision.WON_O in threeResults else UTTTBoardDecision.WON_X
 
         for row in self.board:  # Check rows first
@@ -120,5 +120,5 @@ if __name__ == '__main__':
     b.makeMove(GridStates.PLAYER_X, b.getNextBoardLocation(), (1, 1))
     b.makeMove(GridStates.PLAYER_O, b.getNextBoardLocation(), (2, 1))
     b.makeMove(GridStates.PLAYER_X, b.getNextBoardLocation(), (1, 1))
-    b.printBoard()
-    print (b.getBoardState())
+    #b.printBoard()
+    #print (b.getBoardState())
