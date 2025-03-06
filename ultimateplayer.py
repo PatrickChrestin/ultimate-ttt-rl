@@ -35,6 +35,8 @@ class RandomUTTTPlayer(UTTTPlayer):
                 activeBoardLocations = self.board.getActiveBoardLocations()
                 nextBoardLocation = random.choice(activeBoardLocations)
             emptyPlaces = self.board.getEmptyBoardPlaces(nextBoardLocation)
+            if (len(emptyPlaces) == 0):
+                assert False, 'No empty places in board'
             pickOne = random.choice(emptyPlaces)
             self.board.makeMove(self.player, nextBoardLocation, pickOne)
         return previousState
